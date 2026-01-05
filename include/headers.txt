@@ -1,0 +1,5 @@
+Containing headers files in Visual Studio Code:
+-  GPS.h
+-  BME280.h
+-  PMS7003.h
+-  WebServerUI.h
