@@ -1,0 +1,58 @@
+// ---- BMP280 ----
+#include <Arduino.h>
+#include <Wire.h>
+#include <Adafruit_BMP280.h>
+Adafruit_BMP280 bmp;
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin(21, 22);
+  if (!bmp.begin(0x76) && !bmp.begin(0x77)) {
+    Serial.println("BMP280 not found!");
+  } else {
+    Serial.println("BMP280 detected!");
+  }
+}
+
+void loop() {
+  Serial.print("Temp = ");
+  Serial.print(bmp.readTemperature());
+  Serial.println(" °C");
+
+  Serial.print("Pressure = ");
+  Serial.print(bmp.readPressure() / 100.0);
+  Serial.println(" hPa");
+
+  delay(2000);
+}
+
+
+
+
+// ---- BME280 ----
+#include <Arduino.h>
+#include <Wire.h>
+#include <Adafruit_BME280.h>
+Adafruit_BME280 bme;
+
+void setup() {
+  Serial.begin(115200);
+
+  //Wire.begin(21, 22);
+  Wire.begin(); // default sda, scl pins
+  //Wire.begin(17, 16); //sda, scl
+  //Wire.setClock(100000);
+
+  Serial.println("Testing BME280 on ESP32...");
+  if (!bme.begin(0x76)) {
+    Serial.println("BME280 not found!");
+    while (1);
+  }
+  Serial.println("BME280 detected!");
+}
+
+void loop() {
+  Serial.print("Temp: ");
+  Serial.println(bme.readTemperature());
+  delay(2000);
+}
