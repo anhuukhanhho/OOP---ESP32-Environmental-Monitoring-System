@@ -1,0 +1,91 @@
+#include <WiFi.h>
+#include <WebServer.h>
+#include <Wire.h>
+#include <Adafruit_BME280.h>
+#include <TinyGPSPlus.h>
+#include <PMS.h>
+#include "web.h"
+
+// ---- Home 2.4GHz WiFi ----
+const char* ssid = " ----- ";
+const char* password = " ----- ";
+
+// ---- Objects ----
+WebServer server(80);
+Adafruit_BME280 bme;
+TinyGPSPlus gps;
+HardwareSerial GPSSerial(2);  // UART2
+HardwareSerial PMSSerial(1);  // UART1
+PMS pms(PMSSerial);
+PMS::DATA pmsData;
+
+void setup() {
+  Serial.begin(115200);
+
+  // PMS7003 UART
+  PMSSerial.begin(9600, SERIAL_8N1, 26, 27);
+
+  // I2C
+  Wire.begin(21, 22);
+  if (!bme.begin(0x76)) {
+    Serial.println("❌ BME280 not found");
+  } else {
+    Serial.println("✅ BME280 detected");
+  }
+
+  // GPS UART
+  GPSSerial.begin(9600, SERIAL_8N1, 16, 17);
+  Serial.println("GPS UART started");
+
+  // Wi-Fi connection loop
+  WiFi.mode(WIFI_STA);
+  WiFi.disconnect(true);
+  delay(1000);
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to WiFi");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  // WiFi info feedback with timeout
+  unsigned long startAttemptTime = millis();
+  while (WiFi.status() != WL_CONNECTED) {
+  delay(500);
+  Serial.print(".");
+    if (millis() - startAttemptTime > 15000) {
+      Serial.println("\n❌ WiFi FAILED, restarting...");
+      ESP.restart();
+    }
+  }
+  Serial.println("\n✅ WiFi connected");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+
+  // Web server: URL handlers
+  server.on("/", handleRoot);
+  server.begin();
+  Serial.println("🌐 Web server started");
+}
+
+void loop() {
+  // Read GPS data
+  while (GPSSerial.available()) {
+    gps.encode(GPSSerial.read());
+  }
+  server.handleClient();
+
+  // Read PMS7003 data
+  static unsigned long lastPMS = 0;
+  if (millis() - lastPMS >= 1000) {
+    lastPMS = millis();
+    if (pms.read(pmsData)) {
+      Serial.print("PM1.0: ");
+      Serial.print(pmsData.PM_AE_UG_1_0);
+      Serial.print(" | PM2.5: ");
+      Serial.print(pmsData.PM_AE_UG_2_5);
+      Serial.print(" | PM10: ");
+      Serial.println(pmsData.PM_AE_UG_10_0);
+    }
+  }
+}
