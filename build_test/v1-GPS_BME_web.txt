@@ -1,0 +1,110 @@
+#include <WiFi.h>
+#include <WebServer.h>
+#include <Wire.h>
+#include <Adafruit_BME280.h>
+#include <TinyGPSPlus.h>
+
+// ===== WiFi =====
+const char* ssid = " ----- ";
+const char* password = " ----- ";
+
+// ===== Objects =====
+WebServer server(80);
+Adafruit_BME280 bme;
+TinyGPSPlus gps;
+HardwareSerial GPSSerial(2);  // UART2
+
+// ===== Web Page =====
+String webpage() {
+  String html = "<!DOCTYPE html><html><head>";
+  html += "<meta http-equiv='refresh' content='5'>";
+  html += "<style>";
+  html += "body{font-family:Arial;text-align:center;background:#f2f2f2;}";
+  html += "h1{color:#333;}";
+  html += ".box{background:#fff;padding:15px;margin:10px;border-radius:8px;}";
+  html += "</style></head><body>";
+
+  html += "<h1>ESP32 Environmental Station</h1>";
+
+  html += "<div class='box'><h2>BME280</h2>";
+  html += "Temperature: " + String(bme.readTemperature()) + " *C<br>";
+  html += "Humidity: " + String(bme.readHumidity()) + " %<br>";
+  html += "Pressure: " + String(bme.readPressure() / 100.0F) + " hPa<br>";
+  html += "</div>";
+
+  html += "<div class='box'><h2>GPS (NEO-M8N)</h2>";
+  if (gps.location.isValid()) {
+    html += "Latitude: " + String(gps.location.lat(), 6) + "<br>";
+    html += "Longitude: " + String(gps.location.lng(), 6) + "<br>";
+  } else {
+    html += "Waiting for GPS fix...<br>";
+  }
+  html += "Satellites: " + String(gps.satellites.value()) + "<br>";
+  html += "</div>";
+
+  html += "</body></html>";
+  return html;
+}
+
+// ===== Web Handler =====
+void handleRoot() {
+  server.send(200, "text/html", webpage());
+}
+void setup() {
+  Serial.begin(115200);
+
+  // I2C
+  Wire.begin(21, 22);
+  if (!bme.begin(0x76)) {   // try 0x77 if needed
+    Serial.println("❌ BME280 not found");
+  } else {
+    Serial.println("✅ BME280 detected");
+  }
+
+  // GPS UART
+  GPSSerial.begin(9600, SERIAL_8N1, 16, 17);
+  Serial.println("GPS UART started");
+
+  // Wi-Fi connecting
+  WiFi.mode(WIFI_STA);
+  WiFi.disconnect(true);
+  delay(1000);
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to WiFi");
+  // Wi-Fi connection loop
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+//--- version 1 ---
+unsigned long startAttemptTime = millis();
+
+while (WiFi.status() != WL_CONNECTED) {
+  delay(500);
+  Serial.print(".");
+  if (millis() - startAttemptTime > 15000) {
+    Serial.println("\n❌ WiFi FAILED, restarting...");
+    ESP.restart();
+  }
+}
+
+//--- version 2 ---
+//  Serial.println("\n✅ WiFi connected");
+//  Serial.print("IP address: ");
+//  Serial.println(WiFi.localIP());
+
+  // Web server: URL handlers
+  server.on("/", handleRoot);
+  server.begin();
+  Serial.println("🌐 Web server started");
+}
+
+
+void loop() {
+  // Read GPS data
+  while (GPSSerial.available()) {
+    gps.encode(GPSSerial.read());
+  }
+  server.handleClient();
+}
