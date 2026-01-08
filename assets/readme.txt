@@ -1,0 +1,1 @@
+This is the folder containing diagrams, images, and research materials related to our project. Some are designed on Fitzing, Microsoft Powerpoint, and materials are downloaded from various academic research platforms.
