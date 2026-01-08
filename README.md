@@ -12,6 +12,8 @@ This project implements a low-cost, modular environmental monitoring system usin
 - lib/ → Sensor libraries
 - include/ → Header files
 - report/ → The pdf report for our project
+- .github/workflows → C/C++ CI workflow configuration
+- test/ → build programs to test out sensors operation and integration
 - platformio.ini
 
 -------
