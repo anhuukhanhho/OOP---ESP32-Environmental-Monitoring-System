@@ -5,7 +5,7 @@ This ESP32-based IoT system contains a PMS7003 sensor, a BME280 sensor, NEO-M8N 
 This project implements a low-cost, modular environmental monitoring system using an ESP32 DevKit V1. The system measures particulate matter (PM1, PM2.5, PM10), temperature, humidity, atmospheric pressure, and geographic location, and provides real-time data visualization through both a local web server and a cloud-based platform. The project was developed as part of an Object-Oriented Programming (OOP) course, emphasizing modular software design, sensor integration, and practical IoT deployment.
 
 ## **AUTHORS**
-→ Mr. _**Ho Huu Khanh An**_ | Ms. _**Dang Quynh Huong**_ | Mr. _**Le Nhan Anh Duong** _
+→ Mr. _**Ho Huu Khanh An**_ | Ms. _**Dang Quynh Huong**_ | Mr. _**Le Nhan Anh Duong**_
 → VGU ECE class of 2023
 
 ## Repository Structure
