@@ -8,11 +8,11 @@ This project implements a low-cost, modular environmental monitoring system usin
 -> Mr. Ho Huu Khanh An, Ms. Dang Quynh Huong, Mr. Le Nhan Anh Duong, VGU ECE class of 2023
 
 ## Repository Structure
-src/ → Main firmware source files
-lib/ → Sensor libraries
-include/ → Header files
-report/ → The pdf report for our project
-platformio.ini
+- src/ → Main firmware source files
+- lib/ → Sensor libraries
+- include/ → Header files
+- report/ → The pdf report for our project
+- platformio.ini
 
 -------
 
