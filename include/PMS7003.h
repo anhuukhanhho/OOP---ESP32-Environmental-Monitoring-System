@@ -1,20 +1,21 @@
 // file: header for PMS7003 class
 #ifndef PMS7003_H
 #define PMS7003_H
-
-#include <HardwareSerial.h> // For serial logging and display
-#include <PMS.h> // PMS-master Library from https://github.com/fu-hsi/PMS
+#include <HardwareSerial.h>
+#include <PMS.h>
+// PMS7003 particulate matter sensor classes
+// Handles UART data decoding
 class PMS7003 {
 public:
-    PMS7003(HardwareSerial& serial);
-    void begin(uint32_t baud = 9600);
-    bool update();
+    PMS7003(HardwareSerial& serial); // Bind to serial port
+    void begin(uint32_t baud = 9600); // Initialize
+    bool update(); // Read bool data and update
+    // Bind PMS sensor to hardware serial port
     uint16_t pm1() const;
     uint16_t pm25() const;
     uint16_t pm10() const;
 private:
-    HardwareSerial& _serial;
-    PMS _pms;
+    HardwareSerial& _serial; PMS _pms;
     uint16_t _pm1_0 = 0;
     uint16_t _pm2_5 = 0;
     uint16_t _pm10 = 0;
