@@ -23,6 +23,7 @@ This project implements a low-cost, modular environmental monitoring system usin
 The ESP32 acts as the central microcontroller, interfacing with multiple digital sensors via UART and I2C communication protocols. This dual-output design enables both real-time local monitoring and long-term remote data analysis. Sensor data are processed locally and transmitted to two independent outputs:
 - A lightweight local web server (LAN access)
 - A ThingSpeak cloud dashboard (remote access)
+![System Architecture](assets/Figure 2 color (github).png)
 
 -------
 
@@ -33,7 +34,9 @@ The ESP32 acts as the central microcontroller, interfacing with multiple digital
 - **NEO-M8N GPS module** – Location and time reference
 - **30-pin ESP32 breakout shield** – Structured wiring and modular expansion
 - **5V USB power supply / power bank** – Indoor and portable operation
-- (optional) **tplink EC120-F5 router** – Public-to-Private WiFi configuration
+- (optional) **tplink EC120-F5 router** – Public-to-Private WiFi configuration when required
+![Components Assembly](assets/components_assembly_bb3.jpg)
+![3D-printed Container](assets/)
 
 -------
 
