@@ -2,8 +2,8 @@
 #ifndef GPS_H
 #define GPS_H
 
-#include <TinyGPSPlus.h>
-#include <HardwareSerial.h>
+#include <TinyGPSPlus.h> // GEO-M8N Arduino Library
+#include <HardwareSerial.h> // For serial logging and display
 class GPS {
 public:
     GPS(HardwareSerial& serial);
