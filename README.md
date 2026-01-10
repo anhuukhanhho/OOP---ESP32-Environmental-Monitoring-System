@@ -9,13 +9,14 @@ This project implements a low-cost, modular environmental monitoring system usin
 → VGU ECE class of 2023
 
 ## Repository Structure
-- src/ → Main firmware source files
+- src/ → Main implementation source files
 - lib/ → Sensor libraries
 - include/ → Header files
 - report/ → The pdf report for our project
-- .github/workflows → C/C++ CI workflow configuration
+- .github/workflows → C/C++ PlatformIO workflow configuration (currently bugged)
+- assets/ → related images and diagrams 
 - test/ → build programs to test out sensors operation and integration
-- platformio.ini
+- platformio.ini → PlatformIO initiation code for the project
 
 ## **SYSTEM ARCHITECTURE**
 The ESP32 acts as the central microcontroller, interfacing with multiple digital sensors via UART and I2C communication protocols. This dual-output design enables both real-time local monitoring and long-term remote data analysis. Sensor data are processed locally and transmitted to two independent outputs:
