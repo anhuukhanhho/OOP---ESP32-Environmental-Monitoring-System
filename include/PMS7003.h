@@ -2,8 +2,8 @@
 #ifndef PMS7003_H
 #define PMS7003_H
 
-#include <HardwareSerial.h>
-#include <PMS.h>
+#include <HardwareSerial.h> // For serial logging and display
+#include <PMS.h> // PMS-master Library from https://github.com/fu-hsi/PMS
 class PMS7003 {
 public:
     PMS7003(HardwareSerial& serial);
