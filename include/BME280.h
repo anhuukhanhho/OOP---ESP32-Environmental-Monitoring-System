@@ -2,7 +2,7 @@
 #ifndef BME280_H
 #define BME280_H
 
-#include <Adafruit_BME280.h>
+#include <Adafruit_BME280.h> // Adafruit’s BME280 Library
 class BME280 {
 public:
     bool begin(uint8_t address = 0x76);
