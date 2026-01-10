@@ -17,15 +17,12 @@ This project implements a low-cost, modular environmental monitoring system usin
 - test/ → build programs to test out sensors operation and integration
 - platformio.ini
 
--------
-
 ## **SYSTEM ARCHITECTURE**
 The ESP32 acts as the central microcontroller, interfacing with multiple digital sensors via UART and I2C communication protocols. This dual-output design enables both real-time local monitoring and long-term remote data analysis. Sensor data are processed locally and transmitted to two independent outputs:
 - A lightweight local web server (LAN access)
 - A ThingSpeak cloud dashboard (remote access)
-<p align="center"><img src="assets/Figure 2 color (github).png" width="500"></p>
+<p align="center"><img src="assets/Figure 2 color (github).png" width="800"></p>
 <p align="center"><em>Figure 1. System architecture design.</em></p>
--------
 
 ## **HARDWARE**
 - **ESP32 DevKit V1 (30-pin)** – Main controller with integrated Wi-Fi
@@ -35,11 +32,12 @@ The ESP32 acts as the central microcontroller, interfacing with multiple digital
 - **30-pin ESP32 breakout shield** – Structured wiring and modular expansion
 - **5V USB power supply / power bank** – Indoor and portable operation
 - (optional) **tplink EC120-F5 router** – Public-to-Private WiFi configuration when required
-<p align="center"><img src="assets/components_assembly_bb3.jpg" width="500"></p>
-<p align="center"><em>Figure 1. Components assembly on Fritzing.</em></p>
-<p align="center"><img src="assets/Figure 4 (3d print box).PNG" width="600"></p>
-<p align="center"><em>Figure 1. The first CAD design for the container (M3 screw holes).</em></p>
--------
+<p align="center"><img src="assets/components_assembly_bb3.jpg" width="800"></p>
+<p align="center"><em>Figure 2. Components assembly on Fritzing.</em></p>
+<p align="center"><img src="assets/Figure 4 (3d print box).PNG" width="800"></p>
+<p align="center"><em>Figure 3. The first CAD design for the container (M3 screw holes).</em></p>
+<p align="center"><img src="assets/" width="800"></p>
+<p align="center"><em>Figure 4. The system running in real life.</em></p>
 
 ## **SOFTWARE DESIGN**
 The firmware is written in C/C++ using Visual Studio Code and PlatformIO and follows object-oriented programming principles. Each sensor is encapsulated within its own class, enabling modular initialization, data acquisition, and error handling. It manages sensor polling, data formatting, and communication with both local and cloud-based servers. Key libraries used in this project:
@@ -47,8 +45,6 @@ The firmware is written in C/C++ using Visual Studio Code and PlatformIO and fol
 - Adafruit BME280 library
 - TinyGPSPlus library
 - ESP32 WebServer.h library
-
--------
 
 ## **DATA VISUALIZATION**
 ### **Local Web Server**
@@ -64,12 +60,8 @@ The firmware is written in C/C++ using Visual Studio Code and PlatformIO and fol
 - Auto-update interval: 15 seconds
 - Supports long-term data storage and export
 
--------
-
 ## **POWER REQUIREMENT**
 The system operates from a regulated 5V 2A supply and is also suitable for power bank operation. Average current consumption allows several hours of continuous monitoring depending on battery capacity. Basic power estimation formulas are provided in the project report folder for deployment planning.
-
--------
 
 ## **KNOWN LIMITATIONS**
 - Limited to 2.4 GHz Wi-Fi networks
