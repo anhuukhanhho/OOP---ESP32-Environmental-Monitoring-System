@@ -61,7 +61,9 @@ The firmware is written in C/C++ using Visual Studio Code and PlatformIO and fol
 - Supports long-term data storage and export
 
 ## **POWER REQUIREMENT**
-The system operates from a regulated 5V 2A supply and is also suitable for power bank operation. Average current consumption allows several hours of continuous monitoring depending on battery capacity. Basic power estimation formulas are provided in the project report folder for deployment planning.
+The system operates from a regulated 5V 2A supply and is also suitable for power bank operation. Average current consumption allows several hours of continuous monitoring depending on battery capacity. Basic power estimation formulas are provided in the project report folder for deployment planning. We used a 5V 2A adapter when deploy stationary for a long duration and an Ava+ 5V 15000mAh power bank when we need to make it portable, although the maximum duration is around 35 hours.
+<p align="center"><img src="assets/5v Power Supplies.png" width="800"></p>
+<p align="center"><em>Figure 5. Our chosen power supplies for various working conditions.</em></p>
 
 ## **KNOWN LIMITATIONS**
 - Limited to 2.4 GHz Wi-Fi networks
