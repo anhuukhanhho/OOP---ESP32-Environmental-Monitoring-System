@@ -37,7 +37,7 @@ The ESP32 acts as the central microcontroller, interfacing with multiple digital
 <p align="center"><em>Figure 2. Components assembly on Fritzing.</em></p>
 <p align="center"><img src="assets/Figure 4 (3d print box).PNG" width="800"></p>
 <p align="center"><em>Figure 3. The first CAD design for the container (M3 screw holes).</em></p>
-<p align="center"><img src="assets/" width="800"></p>
+<p align="center"><img src="assets/system-in-real-life.jpg" width="800"></p>
 <p align="center"><em>Figure 4. The system running in real life.</em></p>
 
 ## **SOFTWARE DESIGN**
