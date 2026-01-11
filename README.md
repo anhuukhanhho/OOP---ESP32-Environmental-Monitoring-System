@@ -61,7 +61,7 @@ The firmware is written in C/C++ using Visual Studio Code and PlatformIO and fol
 - Auto-update interval: 15 seconds
 - Supports long-term data storage and export
 
-For an example of the local website UI, please access the .report/ESP32 Air Quality Station - GitHub version.pdf, pages 17 and 18.
+For an example of the local website UI, please access the <a src="report/ESP32 Air Quality Station - GitHub version.pdf">**report**</a>, pages 17 and 18.
 
 ## **POWER REQUIREMENT**
 The system operates from a regulated 5V 2A supply and is also suitable for power bank operation. Average current consumption allows several hours of continuous monitoring depending on battery capacity. Basic power estimation formulas are provided in the project report folder for deployment planning. We used a 5V 2A adapter when deploy stationary for a long duration and an Ava+ 5V 15000mAh power bank when we need to make it portable, although the maximum duration is around 35 hours.
